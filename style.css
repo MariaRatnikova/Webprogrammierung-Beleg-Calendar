@@ -1,0 +1,14 @@
+#kalender-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 Spalten gleich breit */
+    gap: 1rem; /* Abstand zwischen Kästchen */
+}
+
+.monat { /*Monatskästchen Style*/
+    background-color: #f0f0f0; /
+    border: 1px solid #ccc;
+    padding: 1rem;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 8px;
+}
