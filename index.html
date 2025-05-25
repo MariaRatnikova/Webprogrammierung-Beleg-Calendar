@@ -1,14 +1,46 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html> <!-- Deklariert das Dokument als HTML5 -->
+<html lang="de"> <!-- Legt die Sprache der Seite auf Deutsch fest -->
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mein Kalender</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" /> <!-- Zeichencodierung: UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Responsive Design für Mobilgeräte -->
+  <title>Mein Kalender</title> <!-- Titel des Tabs im Browser -->
+  <link rel="stylesheet" href="style.css" /> <!-- Verknüpfung zur externen CSS-Datei -->
 </head>
 <body>
-<h1>Kalender</h1>
-<main id="kalender-container"></main>
-<script src="script.js"></script>
+
+  <!-- ───── obere Leiste mit Jahr + Reset-Button ───── -->
+  <div class="jahr-bar"> <!-- Container für Jahreszahl und Reset-Knopf -->
+    <h1 id="jahr-anzeige" style="cursor:pointer;">2025</h1> <!-- Jahr als klickbarer Titel (öffnet Overlay) -->
+    <button id="reset-jahr">Heute</button> <!-- Button zum Zurückspringen auf aktuelles Jahr -->
+  </div>
+
+  <!-- ► Overlay-Fenster zur Jahresauswahl (erscheint beim Klick auf Jahreszahl) -->
+  <div id="year-overlay" class="hidden"> <!-- Anfang des Overlays, standardmäßig versteckt -->
+    <div class="year-box"> <!-- Weiße Box für Jahresauswahl -->
+
+      <h2>Kalenderjahr</h2> <!-- Überschrift im Overlay -->
+
+      <div class="digit-row"> <!-- Container für die vier Ziffern -->
+
+        <!-- Die ersten zwei Ziffern ("20") sind fest und nicht veränderbar -->
+        <select disabled><option>2</option></select> <!-- Ziffer „2“ (tausender Stelle) -->
+        <select disabled><option>0</option></select> <!-- Ziffer „0“ (hunderter Stelle) -->
+
+        <!-- Diese beiden Selects werden per JavaScript befüllt (0–9) -->
+        <select id="d3"></select> <!-- Zehnerstelle (z.B. 2 in 2025) -->
+        <select id="d4"></select> <!-- Einerstelle (z.B. 5 in 2025) -->
+
+      </div>
+
+      <button id="year-ok">OK</button> <!-- Bestätigungsknopf für das neue Jahr -->
+
+    </div>
+  </div>
+
+  <!-- Bereich für den Kalender (Monate) + Tooltip für Feiertage -->
+  <main id="kalender-container"></main> <!-- Hier wird der Kalender dynamisch eingefügt -->
+  <div id="feiertag-popup" class="popup hidden"></div> <!-- Tooltip-Feld für Feiertagsinfo -->
+
+  <script src="script.js"></script> <!-- Einbindung der JavaScript-Datei -->
 </body>
 </html>

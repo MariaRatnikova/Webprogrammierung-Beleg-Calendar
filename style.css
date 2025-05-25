@@ -1,14 +1,213 @@
 #kalender-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 Spalten gleich breit */
-    gap: 1rem; /* Abstand zwischen Kästchen */
+    display: grid; /* Verwende Grid-Layout für die Monatsanzeige */
+    grid-template-columns: repeat(4, 1fr); /* 4 gleich breite Spalten für 12 Monate */
+    gap: 1rem; /* Abstand zwischen den Monatsfeldern */
 }
 
-.monat { /*Monatskästchen Style*/
-    background-color: #f0f0f0; /
-    border: 1px solid #ccc;
-    padding: 1rem;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 8px;
+.monat { /* Stil eines einzelnen Monatsfeldes */
+    background-color: #f0f0f0; /* hellgrauer Hintergrund */
+    border: 1px solid #ccc; /* grauer Rand */
+    padding: 1rem; /* Innenabstand rundherum */
+    text-align: center; /* Textzentrierung */
+    font-weight: bold; /* Fettschrift für Monatsnamen */
+    border-radius: 8px; /* abgerundete Ecken */
 }
+
+.tage-header,
+.tage-container {
+  display: grid; /* Grid-Layout für Wochentage und Kalendertage */
+  grid-template-columns: repeat(8, minmax(0, 1fr)); /* 8 gleich breite Spalten (KW + Mo–So) */
+  width: 100%; /* volle Breite */
+}
+
+.tage-header div,
+.tage-container div {
+  text-align: center; /* Text zentrieren */
+  border: 1px solid #ddd; /* dünner grauer Rahmen */
+  padding: 0.3rem; /* Innenabstand in der Zelle */
+  box-sizing: border-box; /* Padding und Border zählen zur Gesamtgröße */
+  min-width: 0; /* verhindert zu breite Zellen bei langem Inhalt */
+}
+
+.tage-header {
+  background-color: #aa595998; /* Hintergrundfarbe für Wochentagszeile */
+  color: #000; /* schwarze Schrift */
+  font-weight: lighter; /* dünnere Schriftart */
+  border-bottom: 1px solid #ccc; /* unterer Rand */
+  font-size: 0.85rem; /* kleinere Schriftgröße */
+}
+
+.kw-cell {
+  font-weight: bold; /* fette Schrift für Kalenderwoche */
+  background-color: #eacbcb; /* rosafarbener Hintergrund für KW-Spalte */
+}
+
+.feiertag {
+    background-color: #e0f3ff; /* hellblauer Hintergrund */
+    color: #005577; /* dunkelblauer Text */
+    font-weight: bold; /* fette Schrift */
+    border: 2px solid #3399cc; /* auffälliger blauer Rand */
+}
+
+.heute {
+    background: #FFCA86; /* orangener Hintergrund für heutigen Tag */
+    border: 2px solid #ff9800; /* passender oranger Rand */
+    font-weight: bold; /* fette Schrift */
+}
+
+.heute.feiertag {
+    background: linear-gradient(135deg, #ffecb3 50%, #e0f3ff 50%); /* zweifarbiger Hintergrund bei Kombination von heute + Feiertag */
+}
+
+.popup {
+    position: absolute; /* frei platzierbar über dem Kalender */
+    background-color: white; /* weißer Hintergrund */
+    border-radius: 6px; /* abgerundete Ecken */
+    padding: 0.5rem 1rem; /* Innenabstand */
+    font-size: 0.9rem; /* mittelgroße Schrift */
+    font-weight: bold; /* fette Schrift */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Schatteneffekt */
+    z-index: 1000; /* über anderen Elementen */
+    transition: opacity 0.2s; /* weiches Ein-/Ausblenden */
+}
+
+.hidden {
+    display: none; /* Element verstecken */
+}
+
+/* ---------- Top-Bar-Grundlayout ---------- */
+
+#year-overlay {
+    position: fixed; /* immer über dem Fenster */
+    inset: 0; /* alle Seiten auf 0 → volle Fenstergröße */
+    background: rgba(0, 0, 0, .55); /* halbtransparentes Schwarz */
+    display: flex; /* Flexbox zur Zentrierung */
+    justify-content: center; /* horizontal zentriert */
+    align-items: center; /* vertikal zentriert */
+    z-index: 2000; /* über allem */
+}
+
+#year-overlay.hidden {
+    display: none; /* Overlay ausblenden */
+}
+
+/* ───── weiße Jahresauswahl-Karte ───── */
+.year-box {
+    background: #fff; /* weißer Hintergrund */
+    padding: 1.0rem 2rem; /* Innenabstand oben/unten 1rem, seitlich 2rem */
+    border-radius: 8px; /* abgerundete Ecken */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .3); /* starker Schatten */
+    display: flex; /* Flexbox für vertikale Anordnung */
+    flex-direction: column; /* Elemente untereinander */
+    align-items: center; /* horizontal zentriert */
+}
+
+.digit-row {
+    display: inline-flex; /* alle Selects nebeneinander */
+    gap: .4rem; /* Abstand zwischen Selects */
+    margin: .8rem 0 1.6rem; /* oben 0.8rem, unten 1.6rem Abstand */
+}
+
+.digit-row select {
+    font-size: 1.4rem; /* große Schrift für Auswahl */
+    padding: .2rem .4rem; /* Innenabstand */
+    border-color: #aa595998; /* rosafarbener Rand */
+    border-width: 2px; /* dickerer Rand */
+}
+
+.year-box h2 {
+    margin-bottom: 0.6rem; /* Abstand unter der Überschrift */
+}
+
+/* OK-Button */
+#year-ok {
+    padding: .4rem 1.6rem; /* Innenabstand oben/unten 0.4rem, seitlich 1.6rem */
+    font-weight: bold; /* fette Schrift */
+    cursor: pointer; /* Zeiger beim Überfahren */
+    background: #aa595998; /* rosafarbener Hintergrund */
+    color: #fff; /* weiße Schrift */
+    border: none; /* kein Standardrand */
+    border-radius: 4px; /* abgerundete Ecken */
+    margin-bottom: 1rem; /* Abstand nach unten */
+}
+
+.jahr-bar {
+    display: flex; /* Flexbox für horizontale Anordnung */
+    justify-content: space-between; /* Abstand zwischen Jahr-Anzeige und Reset-Button */
+    align-items: center; /* vertikal zentriert */
+    margin: 1rem 2rem 1rem 2rem; /* Außenabstand: oben/unten 1rem, seitlich 2rem */
+}
+
+#jahr-anzeige {
+    font-size: 2.4rem; /* große Schrift für die aktuelle Jahreszahl */
+    margin: 0; /* kein Außenabstand */
+}
+
+#reset-jahr {
+    background: #aa595998; /* rosafarbener Hintergrund */
+    border: none; /* kein Rand */
+    padding: 0.4rem 1rem; /* Innenabstand */
+    border-radius: 4px; /* abgerundete Ecken */
+    font-weight: bold; /* fette Schrift */
+    cursor: pointer; /* Handzeiger beim Überfahren */
+    transition: background 0.2s; /* weicher Übergang bei Hover */
+}
+
+#reset-jahr:hover {
+    background: #e08900; /* dunkleres Orange beim Hover */
+}
+@media (max-width: 900px) and (min-width: 601px) {
+
+    /* Weniger Spalten im Kalender – z.B. 2 Monate pro Zeile statt 4 */
+    #kalender-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+      padding: 1rem;
+    }
+  
+    /* Monatsbox kompakter darstellen */
+    .monat {
+      padding: 0.6rem;
+      font-size: 0.95rem;
+    }
+  
+    /* Wochentagszeile: kleinere Schrift für bessere Lesbarkeit */
+    .tage-header {
+      font-size: 0.75rem;
+    }
+  
+    /* Tageszellen: kompakteres Layout */
+    .tage-header div,
+    .tage-container div {
+      padding: 0.2rem;
+      font-size: 0.75rem;
+    }
+  
+    /* Tooltip etwas kleiner */
+    .popup {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.8rem;
+    }
+  
+    /* Jahresauswahl: größerer Abstand zwischen Ziffern */
+    .digit-row {
+      gap: 0.6rem;
+    }
+  
+    .digit-row select {
+      font-size: 1.2rem;
+      padding: 0.3rem 0.6rem;
+    }
+  
+    /* OK-Button größer und mittiger */
+    #year-ok {
+      padding: 0.6rem 2rem;
+      font-size: 1rem;
+    }
+  
+    /* Reset-Button oben rechts kleiner */
+    #reset-jahr {
+      padding: 0.3rem 0.8rem;
+      font-size: 0.85rem;
+    }
+  }

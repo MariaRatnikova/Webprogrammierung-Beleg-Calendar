@@ -1,0 +1,42 @@
+{
+    "statisch": [
+      {
+        "name": "Neujahr",
+        "tag": 1,
+        "monat": 1
+      },
+      {
+        "name": "Tag der Arbeit",
+        "tag": 1,
+        "monat": 5
+      },
+      {
+        "name": "Tag der deutschen Einheit",
+        "tag": 3,
+        "monat": 10
+      },
+      {
+        "name": "Reformationstag",
+        "tag": 31,
+        "monat": 10
+      },
+      {
+        "name": "Erster Weihnachtsfeiertag",
+        "tag": 25,
+        "monat": 12
+      },
+      {
+        "name": "Zweiter Weihnachtsfeiertag",
+        "tag": 26,
+        "monat": 12
+      }
+    ],
+    "dynamisch": [
+      "Karfreitag",
+      "Ostermontag",
+      "Himmelfahrt",
+      "Pfingstmontag",
+      "Buß- und Bettag"
+    ]
+  }
+  
