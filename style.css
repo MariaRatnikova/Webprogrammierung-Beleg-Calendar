@@ -1,3 +1,9 @@
+/*  M2B: Kalender-Layout
+   - Monats-Layout im 3x4 CSS Grid
+   - Tage in flexibler Gridstruktur mit 8 Spalten (KW + Mo–So)
+   - Zusätzliche Styles für Feiertage, heute, Wochenzahlen etc.
+ */
+
 #kalender-container {
     display: grid; /* Verwende Grid-Layout für die Monatsanzeige */
     grid-template-columns: repeat(4, 1fr); /* 4 gleich breite Spalten für 12 Monate */

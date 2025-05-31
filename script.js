@@ -1,4 +1,4 @@
-/* ───── DOM-Referenzen ─────────────────────────────────────────────── */
+
 const kalender   = document.getElementById("kalender-container"); // Container für alle Monatsboxen
 const jahrLabel  = document.getElementById("jahr-anzeige");       // Anzeige der aktuellen Jahreszahl
 
@@ -10,7 +10,7 @@ const d4         = document.getElementById("d4");                 // Eingabefeld
 const resetBtn   = document.getElementById("reset-jahr");         // Button zum Zurücksetzen auf das aktuelle Jahr
 const popup      = document.getElementById("feiertag-popup");     // Tooltip zur Anzeige von Feiertagsnamen
 
-/* ───── Laufende Daten ─────────────────────────────────────────────── */
+
 const heute      = new Date();               // Heutiges Datum (aktuelles Datum vom System)
 let   aktJahr    = heute.getFullYear();      // Das momentan angezeigte Jahr
 const aktMonat   = heute.getMonth();         // Der aktuelle Monat (0–11, Januar=0)
@@ -18,7 +18,8 @@ const aktMonat   = heute.getMonth();         // Der aktuelle Monat (0–11, Janu
 const monate = [ "Januar","Februar","März","April","Mai","Juni",
                  "Juli","August","September","Oktober","November","Dezember" ]; // Monatsnamen
 
-/* ───── ISO-Woche berechnen ───────────────────────────────────────── */
+
+// M2A: ISO-Wochennummer berechnen (für Anzeige der Kalenderwoche)
 function isoKW(d){
   const tmp=new Date(d); tmp.setHours(0,0,0,0);                             // Zeit zurücksetzen
   tmp.setDate(tmp.getDate()+3-((tmp.getDay()+6)%7));                       // zum Donnerstag der Woche springen
@@ -26,7 +27,7 @@ function isoKW(d){
   return 1+Math.round(((tmp-w1)/864e5-3+((w1.getDay()+6)%7))/7);           // ISO-Wochennummer berechnen
 }
 
-/* ───── Osterdatum (Gauß) ─────────────────────────────────────────── */
+
 function ostern(j){
   const a=j%19,b=Math.floor(j/100),c=j%100,d=Math.floor(b/4),e=b%4,       // Zwischenrechnungen
         f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),
@@ -54,7 +55,13 @@ async function feiertageFür(j){
   return [...stat,...dyn];                                              // feste + dynamische Feiertage zusammenführen
 }
 
-/* ───── Einzelmonat ausgeben ──────────────────────────────────────── */
+/*  M2A: Kalender-Logik
+   - Dynamische Erzeugung der Monatsansicht
+   - Berücksichtigt Anzahl der Tage inkl. Schaltjahr
+   - Kalenderwochen (ISO) werden korrekt eingefügt
+   - Feiertage und aktueller Tag werden hervorgehoben
+ */
+
 function baueMonat(j,m,fts){
   const box = document.createElement("div");                            // Monats-Container
   box.className = "monat";
@@ -113,7 +120,8 @@ function baueMonat(j,m,fts){
   return box;
 }
 
-/* ───── Kompletten Jahreskalender rendern ─────────────────────────── */
+// M2A: Komplette Jahresübersicht rendern, ruft baueMonat() für alle 12 Monate auf
+
 async function zeigeJahr(j){
   const fts = await feiertageFür(j);                                   // Feiertage für das Jahr laden
   kalender.innerHTML = "";                                             // alten Kalender löschen
@@ -123,7 +131,7 @@ async function zeigeJahr(j){
   jahrLabel.textContent = j;                                           // Jahreszahl in der Anzeige aktualisieren
 }
 
-/* ───── Tooltip für Feiertage ─────────────────────────────────────── */
+
 document.addEventListener("click",evt=>{
   const el = evt.target;
   if(el.classList.contains("tag") && el.classList.contains("feiertag")){
@@ -134,7 +142,7 @@ document.addEventListener("click",evt=>{
   }else popup.classList.add("hidden");                                 // Tooltip ausblenden
 });
 
-/* ───── Overlay-Dialog steuern ────────────────────────────────────── */
+
 function setDigits(y){ const s=String(y); d3.value=s[2]; d4.value=s[3]; } // Ziffernfelder setzen
 
 jahrLabel.addEventListener("click",()=>{
@@ -152,7 +160,7 @@ okBtn.addEventListener("click",()=>{
   zeigeJahr(y);                                                        // Jahr anzeigen
 });
 
-/* ───── Reset-Button auf heutiges Jahr ────────────────────────────── */
+
 resetBtn.addEventListener("click",()=> zeigeJahr(heute.getFullYear())); // Aktuelles Jahr anzeigen
 
 
