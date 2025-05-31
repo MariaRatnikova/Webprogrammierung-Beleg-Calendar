@@ -12,7 +12,7 @@
 
 /* Monatsbox Stoö */
 .monat {
-    background-color: #F8F1E7; /* HG */
+    background-color: #FDFDFD; /* HG */
     border: 1px solid #ccc; /*  Rand */
     padding: 1rem; /* Innenabstand  */
     text-align: center; /* Textzentrierung */
@@ -35,30 +35,39 @@
   box-sizing: border-box; /* Padding und Border zählen zur Gesamtgröße */
   min-width: 0; /* verhindert zu breite Zellen bei langem Inhalt */
 }
+
+
  /* Wochentage - Zeile oben */
 .tage-header {
-  background-color: #aa595998; /* HG Farbe */
+  background-color: #CFC2B3; /* HG Farbe */
   color: #000; /* schwarze Schrift */
   font-weight: lighter; /* dünnere Schriftart */
   border-bottom: 1px solid #ccc; /* unterer Rand */
   font-size: 0.85rem; /* kleinere Schriftgröße */
 }
-
-.kw-cell {
-  font-weight: bold; /* fette Schrift für Kalenderwoche */
-  background-color: #eacbcb; /* rosafarbener Hintergrund für KW-Spalte */
+ /* Übercshift KW passend zu den zahlen */
+.tage-header div:first-child {
+    background-color: #EADFD3;
+    font-weight: bold;
 }
 
+/*zellen links wo die KW drin steht */
+.kw-cell {
+  font-weight: bold; /* fette Schrift für Kalenderwoche */
+  background-color: #EADFD3; /* HG */
+}
+
+/* Feiertag Design */
 .feiertag {
-    background-color: #e0f3ff; /* hellblauer Hintergrund */
-    color: #005577; /* dunkelblauer Text */
+    background-color: #72B1A3; /* hg*/
+    color: #fff; /* Text */
     font-weight: bold; /* fette Schrift */
-    border: 2px solid #3399cc; /* auffälliger blauer Rand */
+    border: 2px solid #3399cc; /* Rand */
 }
 
 .heute {
-    background: #FFCA86; /* orangener Hintergrund für heutigen Tag */
-    border: 2px solid #ff9800; /* passender oranger Rand */
+    background: #FF8C7A; /* HG aktueller Tag */
+    border: 2px solid #FF8C7A; /* passender  Rand */
     font-weight: bold; /* fette Schrift */
 }
 
@@ -81,6 +90,16 @@
 .hidden {
     display: none; /* Element verstecken */
 }
+
+/* Hover auf Tagen */
+.tage-container div:not(.kw-cell):not(.tage-header div):not(.feiertag):not(.heute):hover {
+    background-color: #B6DED1; /* Mint aus dem Icon */
+    color: #000;
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.2s ease;
+}
+
 
 /* ---------- Top-Bar-Grundlayout ---------- */
 
@@ -119,7 +138,7 @@
 .digit-row select {
     font-size: 1.4rem; /* große Schrift für Auswahl */
     padding: .2rem .4rem; /* Innenabstand */
-    border-color: #aa595998; /* rosafarbener Rand */
+    border-color: #B6DED1; /* rand zum icon */
     border-width: 2px; /* dickerer Rand */
 }
 
@@ -132,8 +151,8 @@
     padding: .4rem 1.6rem; /* Innenabstand oben/unten 0.4rem, seitlich 1.6rem */
     font-weight: bold; /* fette Schrift */
     cursor: pointer; /* Zeiger beim Überfahren */
-    background: #aa595998; /* rosafarbener Hintergrund */
-    color: #fff; /* weiße Schrift */
+    background: #B6DED1; /* Mint Hintergrund */
+    color: #000;
     border: none; /* kein Standardrand */
     border-radius: 4px; /* abgerundete Ecken */
     margin-bottom: 1rem; /* Abstand nach unten */
@@ -152,22 +171,56 @@
 }
 
 #jahr-anzeige {
-    font-size: 2.4rem; /* große Schrift für die aktuelle Jahreszahl */
-    margin: 0; /* kein Außenabstand */
+    font-size: 2.4rem;
+    margin: 0;
+    cursor: pointer; /* damit man nen hinweiß hat, dass es klickbar ist */
+    transition: color 0.2s ease;
 }
 
+#jahr-anzeige:hover {
+    color: #E46C5B; /* leichte Korall-Farbe beim drübergehen */
+}
+
+.jahr-icon {
+    font-size: 1.2rem;
+    color: #999; /* leichtes Grau */
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    transition: color 0.2s;
+}
+
+#jahr-anzeige:hover .jahr-icon {
+    color: #E46C5B; /* hübsches korallrot beim Hover */
+}
+
+/* pfeil damit man weiß, das man das jahr anklicken kann um es zu ändern */
+#jahr-anzeige::after {
+    content: " ▼";
+    font-size: 1.2rem;
+    color: #000;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    transition: color 0.2s;
+}
+
+#jahr-anzeige:hover::after {
+    color: #E46C5B; /* korallrot beim Hover */
+}
+
+/* Button um zum aktuellen jahr zu springen */
 #reset-jahr {
-    background: #aa595998; /* rosafarbener Hintergrund */
-    border: none; /* kein Rand */
-    padding: 0.4rem 1rem; /* Innenabstand */
-    border-radius: 4px; /* abgerundete Ecken */
-    font-weight: bold; /* fette Schrift */
-    cursor: pointer; /* Handzeiger beim Überfahren */
-    transition: background 0.2s; /* weicher Übergang bei Hover */
+    background: #FF8C7A; /* korallrot wie bie tag*/
+    border: 2px solid #E66C5D;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
 #reset-jahr:hover {
-    background: #e08900; /* dunkleres Orange beim Hover */
+    background: #E46C5B; /*  Hover heute tag */
 }
 
 /* M6A: Responsive Design – Tablet
