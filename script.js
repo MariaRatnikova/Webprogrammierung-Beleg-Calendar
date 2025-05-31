@@ -27,14 +27,27 @@ function isoKW(d){
   return 1+Math.round(((tmp-w1)/864e5-3+((w1.getDay()+6)%7))/7);           // ISO-Wochennummer berechnen
 }
 
-// M3B: Berechnung des Osterdatums mit der Gaußformel (für dynamische Feiertage)
+/*  M3B: Gaußformel zur Osterberechnung
+   Diese Funktion berechnet das Datum des Ostersonntags für ein gegebenes Jahr (j)
+   mithilfe der klassischen Gaußformel. Von diesem Datum werden  dynamische
+   Feiertage wie Karfreitag, Ostermontag, Himmelfahrt und Pfingsten abgeleitet.
+ */
 
 function ostern(j){
-  const a=j%19,b=Math.floor(j/100),c=j%100,d=Math.floor(b/4),e=b%4,       // Zwischenrechnungen
-        f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),
-        h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,
-        l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),
-        n=Math.floor((h+l-7*m+114)/31),p=(h+l-7*m+114)%31+1;
+  const a=j%19,                               // jahr im Mondzyklus
+        b=Math.floor(j/100),               //b für das jahundert und c das jahr in einem jahrhundert
+        c=j%100,
+        d=Math.floor(b/4),
+        e=b%4,       // d und e helfen den kalender zu kalibrieren
+        f=Math.floor((b+8)/25),
+        g=Math.floor((b-f+1)/3), //f und g sind für feinkorrekturen des kalender verhaltens
+        h=(19*a+b-d-g+15)%30,
+        i=Math.floor(c/4),
+        k=c%4, // i und k passen den Tag im Monat an
+        l=(32+2*e+2*i-h-k)%7, //Korrektur des Wochentags
+        m=Math.floor((a+11*h+22*l)/451), // fällt der tag auf märz oder april ??
+        n=Math.floor((h+l-7*m+114)/31),
+        p=(h+l-7*m+114)%31+1; //n schaut auf den monat 3 für märz oder 4 für april und p ist der tag vor dem monat
   return new Date(j,n-1,p);                                               // Datum des Ostersonntags zurückgeben
 }
 
