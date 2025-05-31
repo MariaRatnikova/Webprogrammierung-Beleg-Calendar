@@ -3,6 +3,11 @@
  - HTML, CSS, JS & Icons werden im Cache gespeichert
  - Grundlage für PWA-Offline-Modus
 */
+/* M8A: Offline-Modus wurde mit Chrome DevTools getestet
+ Vorgehen:
+- DevTools > Application > Service Workers > "Offline" anhaken
+- Seite neu laden → Kalender funktioniert vollständig offline
+- Konsole geprüft: keine Fehler */
 
 const CACHE_NAME = 'kalender-cache-v3';
 
@@ -16,14 +21,14 @@ const urlsToCache = [
     'assets/icons/icon-512.png'
 ];
 
-// M7B: Installiere SW & cache Ressourcen install chace alle dateien
+// M7B: I Install – Ressourcen beim ersten Laden cachen
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
     );
 });
 
-// M7B: Aktiviere neuen Cache und lösche alte ACTIVATE – Alte Caches löschen
+// M7B: Activate – Alten Cache entfernen, neuen aktivieren
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(cacheNames =>
@@ -34,7 +39,7 @@ self.addEventListener('activate', event => {
     );
 });
 
-// M7B: Network-First Strategie für Ressourcenabruf FETCH – Netzwerk → Cache
+// M7B + M8B: Fetch – Netzwerk zuerst, Fallback auf Cache bei Fehler
 self.addEventListener('fetch', event => {
     event.respondWith(
         fetch(event.request)
