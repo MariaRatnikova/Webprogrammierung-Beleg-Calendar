@@ -169,7 +169,10 @@
     background: #e08900; /* dunkleres Orange beim Hover */
 }
 
-/* Smartohine (max 600px) */
+/* M6A: Responsive Design – Tablet
+   - Anpassungen für Tablet-Bildschirme max 900 px - ist der durchschnitt zumindest
+   - Monatsgrid ggf. enger, Buttons größer, Texte besser lesbar
+ */
 @media (max-width: 900px) and (min-width: 601px) {
 
     /* Weniger Spalten im Kalender – z.B. 2 Monate pro Zeile statt 4 */
@@ -226,6 +229,11 @@
     }
   }
 
+/* M6B: Responsive Design – Smartphone
+   - Optimierung für kleine Displays (i.d.r so bis 600 px)
+   - Monatsraster 1-spaltig, große Buttons, Inhalte gestapelt
+   - Schriftgrößen reduziert, Bedienelemente fingerfreundlich
+ */
 @media (max-width: 600px) {
     #kalender-container {
         grid-template-columns: 1fr; /* Nur 1 Monat pro Zeile */
