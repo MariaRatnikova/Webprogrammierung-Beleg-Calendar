@@ -156,6 +156,8 @@
 #reset-jahr:hover {
     background: #e08900; /* dunkleres Orange beim Hover */
 }
+
+/* Smartohine (max 600px) */
 @media (max-width: 900px) and (min-width: 601px) {
 
     /* Weniger Spalten im Kalender – z.B. 2 Monate pro Zeile statt 4 */
@@ -211,3 +213,67 @@
       font-size: 0.85rem;
     }
   }
+
+@media (max-width: 600px) {
+    #kalender-container {
+        grid-template-columns: 1fr; /* Nur 1 Monat pro Zeile */
+        gap: 0.6rem;
+        padding: 0.8rem;
+    }
+
+    .monat {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .tage-header,
+    .tage-container {
+        grid-template-columns: repeat(8, 1fr); /* bleibt gleich, aber schmaler */
+    }
+
+    .tage-header div,
+    .tage-container div {
+        padding: 0.15rem;
+        font-size: 0.7rem;
+    }
+
+    .jahr-bar {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    #jahr-anzeige {
+        font-size: 2rem;
+    }
+
+    #reset-jahr {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.8rem;
+    }
+
+    .year-box {
+        width: 90%; /* Weißes Overlay etwas kleiner machen */
+    }
+
+    .digit-row {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .digit-row select {
+        font-size: 1.1rem;
+        padding: 0.3rem;
+    }
+
+    #year-ok {
+        font-size: 0.95rem;
+        padding: 0.5rem 1.2rem;
+    }
+
+    .popup {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
