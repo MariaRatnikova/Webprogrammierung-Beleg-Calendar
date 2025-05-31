@@ -1,22 +1,38 @@
-const cacheName = 'kalender-cache-v1';
-const filesToCache = [
-    './',
-    './index.html',
-    './style.css',
-    './script.js',
-    './manifest.json',
-    './assets/icons/icon-192.png',
-    './assets/icons/icon-512.png'
+const CACHE_NAME = 'kalender-cache-v3';
+
+const urlsToCache = [
+    '/',
+    'index.html',
+    'style.css',
+    'script.js',
+    'manifest.json',
+    'assets/icons/icon-192.png',
+    'assets/icons/icon-512.png'
 ];
 
+// INSTALL – Cache alle Dateien
 self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open(cacheName).then(cache => cache.addAll(filesToCache))
+        caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
     );
 });
 
+// ACTIVATE – Alte Caches löschen
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(cacheNames =>
+            Promise.all(
+                cacheNames.filter(name => name !== CACHE_NAME).map(name => caches.delete(name))
+            )
+        )
+    );
+});
+
+// FETCH – Netzwerk → Cache
 self.addEventListener('fetch', event => {
     event.respondWith(
-        caches.match(event.request).then(response => response || fetch(event.request))
+        fetch(event.request)
+            .then(response => response)
+            .catch(() => caches.match(event.request))
     );
 });
