@@ -114,6 +114,7 @@
     margin: .8rem 0 1.6rem; /* oben 0.8rem, unten 1.6rem Abstand */
 }
 
+/* M5B: Styling für Jahres-Select und Reset-Button */
 .digit-row select {
     font-size: 1.4rem; /* große Schrift für Auswahl */
     padding: .2rem .4rem; /* Innenabstand */
@@ -137,6 +138,11 @@
     margin-bottom: 1rem; /* Abstand nach unten */
 }
 
+/*  M5B: Topbar-Layout & Responsivität
+   - Layout für obere Leiste (Jahresanzeige & Buttons)
+   - Responsives Verhalten für kleine Screens
+   - Zentrale Platzierung
+*/
 .jahr-bar {
     display: flex; /* Flexbox für horizontale Anordnung */
     justify-content: space-between; /* Abstand zwischen Jahr-Anzeige und Reset-Button */

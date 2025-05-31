@@ -188,21 +188,25 @@ overlay.addEventListener("click",e=>{
   if(e.target===overlay) overlay.classList.add("hidden");              // Klick außerhalb: Overlay schließen
 });
 
+// M5A: Jahr aus Sleect feldern zurücsetzen
 okBtn.addEventListener("click",()=>{
   const y = 2000 + (+d3.value)*10 + (+d4.value);                       // Jahr berechnen
   overlay.classList.add("hidden");                                     // Overlay schließen
   zeigeJahr(y);                                                        // Jahr anzeigen
 });
 
+// M5A: Klick auf "Heute"-Button setzt das aktuelle Jahr
+resetBtn.addEventListener("click",()=> zeigeJahr(heute.getFullYear()));
 
-resetBtn.addEventListener("click",()=> zeigeJahr(heute.getFullYear())); // Aktuelles Jahr anzeigen
+/* M5A: Jahresauswahl & Reset-Funktion
+   - Zwei Select-Elemente zur Auswahl der Ziffern für 2000–2099
+   - Button „Heute“ setzt Ansicht auf das aktuelle Jahr zurück
+    */
 
-
-/* ───── dritte & vierte Ziffern initial befüllen ─────────────────── */
 for(let i=0;i<=9;i++){ d3.add(new Option(i,i)); d4.add(new Option(i,i)); } // Optionen 0–9 einfügen
 
-/* ───── Start: aktuelles Jahr darstellen ─────────────────────────── */
-zeigeJahr(aktJahr); // Kalender für aktuelles Jahr anzeigen
+
+zeigeJahr(aktJahr); // Kalender für aktuelles Jahr darstellen
 
 //Serviceworker für Offline nutzung
 if ('serviceWorker' in navigator) {
