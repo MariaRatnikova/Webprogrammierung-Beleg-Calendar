@@ -27,6 +27,7 @@ function isoKW(d){
   return 1+Math.round(((tmp-w1)/864e5-3+((w1.getDay()+6)%7))/7);           // ISO-Wochennummer berechnen
 }
 
+// M3B: Berechnung des Osterdatums mit der Gaußformel (für dynamische Feiertage)
 
 function ostern(j){
   const a=j%19,b=Math.floor(j/100),c=j%100,d=Math.floor(b/4),e=b%4,       // Zwischenrechnungen
@@ -37,7 +38,12 @@ function ostern(j){
   return new Date(j,n-1,p);                                               // Datum des Ostersonntags zurückgeben
 }
 
-/* ───── (De) feste + dynamische Feiertage laden ───────────────────── */
+/* M3A: Feiertage laden via JSON & Fetch (AJAX)
+   - Feiertage werden aus externer JSON-Datei geladen (feiertage.json)
+   - Fetch wird verwendet
+   - Statische Feiertage werden direkt als Date-Objekte gespeichert
+*/
+
 async function feiertageFür(j){
   const res  = await fetch("./data/feiertage.json");                      // JSON-Datei laden
   const js   = await res.json();                                          // Inhalt parsen
@@ -45,6 +51,9 @@ async function feiertageFür(j){
   const stat = js.statisch.map(f=>({name:f.name, date:new Date(j,f.monat-1,f.tag)})); // feste Feiertage erzeugen
 
   const easter = ostern(j);                                              // Ostersonntag berechnen
+
+  // M3B: Dynamische Feiertage anhand des Osterdatums berechnen
+
   const dyn = [
     {name:"Karfreitag",     date:new Date(+easter-2*864e5)},             // Karfreitag = 2 Tage vor Ostern
     {name:"Ostermontag",    date:new Date(+easter+864e5)},               // Ostermontag = 1 Tag nach Ostern
@@ -102,6 +111,9 @@ function baueMonat(j,m,fts){
     const feiertagObj = fts.find(f=>f.date.getFullYear()===j&&f.date.getMonth()===m&&f.date.getDate()===d); // Feiertag?
 
     if(heuteFlag)          zelle.classList.add("heute");               // "heute"-Markierung
+
+    // M3B: Feiertag optisch hervorheben + Tooltip anzeigen
+
     if(feiertagObj){
       zelle.classList.add("feiertag");                                 // Feiertags-Markierung
       zelle.title = feiertagObj.name;                                  // Tooltip-Text setzen
