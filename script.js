@@ -123,6 +123,11 @@ function baueMonat(j,m,fts){
     
     const feiertagObj = fts.find(f=>f.date.getFullYear()===j&&f.date.getMonth()===m&&f.date.getDate()===d); // Feiertag?
 
+    /* M4A: Aktuellen Tag & Feiertage visuell hervorheben
+        - Aktueller Tag erhält Klasse „heute“
+        - Feiertage erhalten Klasse „feiertag“
+        */
+
     if(heuteFlag)          zelle.classList.add("heute");               // "heute"-Markierung
 
     // M3B: Feiertag optisch hervorheben + Tooltip anzeigen
@@ -156,6 +161,10 @@ async function zeigeJahr(j){
   jahrLabel.textContent = j;                                           // Jahreszahl in der Anzeige aktualisieren
 }
 
+/*  M4B: Interaktive Anzeige des Feiertagsnamens
+ - Klick auf Feiertag zeigt feld mit Namen
+ - feld wird an Mausposition angezeigt
+ - Klick außerhalb blendet feld wieder aus */
 
 document.addEventListener("click",evt=>{
   const el = evt.target;
