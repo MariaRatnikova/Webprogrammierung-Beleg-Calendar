@@ -10,10 +10,11 @@
     gap: 1rem; /* Abstand zwischen den Monatsfeldern */
 }
 
-.monat { /* Stil eines einzelnen Monatsfeldes */
-    background-color: #f0f0f0; /* hellgrauer Hintergrund */
-    border: 1px solid #ccc; /* grauer Rand */
-    padding: 1rem; /* Innenabstand rundherum */
+/* Monatsbox Stoö */
+.monat {
+    background-color: #F8F1E7; /* HG */
+    border: 1px solid #ccc; /*  Rand */
+    padding: 1rem; /* Innenabstand  */
     text-align: center; /* Textzentrierung */
     font-weight: bold; /* Fettschrift für Monatsnamen */
     border-radius: 8px; /* abgerundete Ecken */
@@ -34,9 +35,9 @@
   box-sizing: border-box; /* Padding und Border zählen zur Gesamtgröße */
   min-width: 0; /* verhindert zu breite Zellen bei langem Inhalt */
 }
-
+ /* Wochentage - Zeile oben */
 .tage-header {
-  background-color: #aa595998; /* Hintergrundfarbe für Wochentagszeile */
+  background-color: #aa595998; /* HG Farbe */
   color: #000; /* schwarze Schrift */
   font-weight: lighter; /* dünnere Schriftart */
   border-bottom: 1px solid #ccc; /* unterer Rand */
