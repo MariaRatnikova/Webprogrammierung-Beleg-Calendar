@@ -162,3 +162,11 @@ for(let i=0;i<=9;i++){ d3.add(new Option(i,i)); d4.add(new Option(i,i)); } // Op
 /* ───── Start: aktuelles Jahr darstellen ─────────────────────────── */
 zeigeJahr(aktJahr); // Kalender für aktuelles Jahr anzeigen
 
+//Serviceworker für Offline nutzung
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('Service Worker registriert:', reg.scope))
+        .catch(err => console.error('Service Worker Fehler:', err));
+  });
+}
