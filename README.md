@@ -4,7 +4,7 @@ Eine vollständig offline-fähige Progressive Web App (PWA) zur Darstellung eine
 
 ## 🧑‍💻 Team
 - Lilly Schilling (s87216)
-- Marija (S-Nummer)
+- Marija (s86339)
 
 ## 📁 Projektstruktur
 - `index.html` – Hauptseite der PWA
@@ -45,29 +45,3 @@ Eine vollständig offline-fähige Progressive Web App (PWA) zur Darstellung eine
 - JSON (Ajax Fetch)
 - PWA: Manifest, Service Worker, Icons
 
-## Erfüllte Anforderungen
-| Kriterium | Umsetzung |
-|----------|-----------|
-| **Darstellung eines Kalenders mit Kalenderwochen** | Dynamische Generierung im CSS-Grid-Layout mit 3×4 Monaten und 8 Spalten (KW + Mo–So) |
-| **Statische Feiertage (JSON)** | `feiertage.json` im Verzeichnis `data/` – mit Name, Tag, Monat |
-| **Dynamische Feiertage (berechnet)** | Mit JavaScript (inkl. Gaußsche Osterformel, Schaltjahrprüfung) |
-| **Aktuelles Datum markiert** | Korallrot hervorgehoben (`.heute`) |
-| **Feiertage farblich hervorgehoben** | In Mint (`.feiertag`) + Tooltip bei Klick |
-| **Kalenderjahr wählbar (Topbar + Select)** | Dynamische Jahresauswahl über Overlay (`select` für Ziffern) |
-| **Voreinstellung: aktuelles Jahr** | Dynamisch gesetzt bei App-Start und Reload |
-| **Responsives Design** | CSS-Media-Queries für Tablet (<900px) & Mobile (<600px) |
-| **Title-Tag mit Jahr** | Dynamisch via JavaScript gesetzt |
-| **PWA-Funktionalität (Manifest, Icons)** | `manifest.json` + `assets/icons/` eingebunden |
-| **Service Worker (Caching, Offline)** | `sw.js` – statische Assets gecached, Fallback funktioniert ohne offline.html |
-| **Test über Chrome DevTools: erfolgreich** | Offline-Modus geprüft (Application > Service Worker > „Offline“ ✓) |
-## Angestrebte Note
-| Bewertungsstufe | Kriterium | ✔ Erfüllt |
-|-----------------|-----------|-----------|
-| **Genügend** | Kalender, Feiertage im Code, dynamische Berechnung | ✅ |
-| **Befriedigend** | Kalenderwochen, aktueller Tag, Title-Tag, Topbar, Feiertage als JSON | ✅ |
-| **Gut** | Responsives Layout, Feiertage via Fetch/Ajax aus externer JSON | ✅ |
-| **Sehr gut** | PWA installierbar, funktioniert komplett offline | ✅ |
-## 📅 Abgabe
-- Als ZIP an paul@informatik.htw-dresden.de
-- Deadline: **10.06.2025 – 23:59 Uhr**
-- Betreff: MI – Beleg Kalender-PWA – [Name, S-Nummern]
