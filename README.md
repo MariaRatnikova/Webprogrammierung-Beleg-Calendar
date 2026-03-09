@@ -1,47 +1,53 @@
-# Kalender-PWA
+# Calendar PWA
 
-Eine vollständig offline-fähige Progressive Web App (PWA) zur Darstellung eines Jahreskalenders für das Bundesland Sachsen. Enthält Feiertage, Kalenderwochen, heutiges Datum und eine flexible Jahresauswahl von 2000 bis 2099 – optimiert für Desktop, Tablet und Smartphone.
+A fully offline-capable Progressive Web App (PWA) for displaying a yearly calendar for the federal state of Saxony (Germany). It includes public holidays, calendar weeks, the current day, and a flexible year selection from 2000 to 2099 – optimized for desktop, tablet, and smartphone.
 
 ## 🧑‍💻 Team
 - Lilly Schilling (s87216)
-- Marija (s86339)
+- Marija Ratnikova (s86339)
 
-## 📁 Projektstruktur
-- `index.html` – Hauptseite der PWA
-- `style.css` – Design
-- `script.js` – Kalenderlogik (dynamisch per JS)
-- `data/feiertage.json` – Feiertage (statisch + dynamisch)
-- `assets/icons/` – PWA-Icons
-- `manifest.json`, `sw.js` – PWA-Funktionalität (folgt)
+## 📁 Project Structure
+- `index.html` – Main page of the PWA
+- `style.css` – Design and styling
+- `script.js` – Calendar logic (generated dynamically with JavaScript)
+- `data/feiertage.json` – Public holidays (static + calculated)
+- `assets/icons/` – PWA icons
+- `manifest.json`, `sw.js` – PWA functionality
 
-## ▶️ Lokale Nutzung
+## ▶️ Local Usage
 
-1. Projektordner entpacken / klonen
-2. Ein beliebigen lokalen Server starten (z. B. VSCode mit Live Server Plugin)
-3. index.html im Browser aufrufen
-4. Projekt wird im Browser geööfnet
-5. Offline-Test
-    - DevTools - Application - Service Worker - "Offline" aktivieren
-    - Seite neu laden - App funktioniert ohne Internet
+1. Download or clone the project folder  
+2. Start any local server (for example VSCode with the Live Server extension)  
+3. Open `index.html` in the browser  
+4. The project will run in the browser  
 
-## Installation als App
-1. Aufrufen im Browser
-2. "App installieren" auswöhlen - in Adresszeile oder Menü
-3. App läuft nun im App Fester mit App Icon an Taskleiste
+### Offline Test
+1. Open **DevTools**
+2. Go to **Application → Service Worker**
+3. Enable **Offline**
+4. Reload the page — the app should work without an internet connection
+
+## Installation as an App
+
+1. Open the project in a browser  
+2. Select **Install App** in the address bar or browser menu  
+3. The app will run in its own application window with an icon in the taskbar
 
 ## Features
-- Dynamische Darstellung des gesamten Jahres (2000–2099)
-- Sachsen-spezifische Feiertage (fix + beweglich)
-- Hervorhebung des heutigen Tages und der Feiertage
-- Kalenderwochen + Farbsystem für bessere Orientierung
-- Responsives Layout (Desktop, Tablet, Smartphone)
-- Installierbar als PWA
-- Vollständig offline nutzbar
 
-## Genutzte Technologien
-- HTML5, CSS3, JavaScript (Es6)
-- Css Grid Layout und Media Querires
-- Gaußsche Osterformel
-- JSON (Ajax Fetch)
-- PWA: Manifest, Service Worker, Icons
+- Dynamic display of the entire year (2000–2099)
+- Saxony-specific public holidays (fixed and movable)
+- Highlighting of the current day and holidays
+- Calendar weeks with a color system for better orientation
+- Responsive layout (desktop, tablet, smartphone)
+- Installable as a PWA
+- Fully usable offline
+
+## Technologies Used
+
+- HTML5, CSS3, JavaScript (ES6)
+- CSS Grid Layout and Media Queries
+- Gauss algorithm for calculating Easter
+- JSON (AJAX Fetch)
+- PWA technologies: Manifest, Service Worker, Icons
 
